@@ -1,0 +1,2 @@
+# HDiSED
+CzytnikNFC
