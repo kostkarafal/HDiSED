@@ -11,7 +11,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "tag")
+@Table(name = "tag2")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
@@ -26,19 +26,21 @@ public class Tag {
     @NotBlank
     private String content;
     
+    @NotBlank
     private String description;
     
+    @NotBlank
     private String localization;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updatedAt;
+//    @Column(nullable = false, updatable = false)
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @CreatedDate
+//    private Date createdAt;
+//
+//    @Column(nullable = false)
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @LastModifiedDate
+//    private Date updatedAt;
 
     public Long getId() {
         return id;
@@ -48,11 +50,11 @@ public class Tag {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getName() {
         return name;
     }
 
-    public void setTitle(String title) {
+    public void setName(String title) {
         this.name = title;
     }
 
@@ -80,20 +82,20 @@ public class Tag {
         this.localization = localization;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+//    public Date getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public void setCreatedAt(Date createdAt) {
+//        this.createdAt = createdAt;
+//    }
+//
+//    public Date getUpdatedAt() {
+//        return updatedAt;
+//    }
+//
+//    public void setUpdatedAt(Date updatedAt) {
+//        this.updatedAt = updatedAt;
+//    }
 
 }

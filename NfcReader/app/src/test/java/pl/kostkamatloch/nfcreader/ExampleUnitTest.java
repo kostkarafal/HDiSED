@@ -1,4 +1,4 @@
-package com.example.rafal.nfcreader;
+package pl.kostkamatloch.nfcreader;
 
 import org.junit.Test;
 
