@@ -8,28 +8,30 @@ import com.google.gson.annotations.SerializedName;
  * Created by Rafal on 06.06.2018.
  */
 
-public class Tag {
+public class TestNfcTag {
     @SerializedName("id")
         private Long id;
-        @SerializedName("name")
+    @SerializedName("name")
         private String name;
     @SerializedName("content")
         private String content;
+    @SerializedName("latitude")
+        private double latitude;
+    @SerializedName("longitude")
+        private double longitude;
     @SerializedName("description")
         private String description;
-    @SerializedName("localization")
-        private String localization;
 
-
-    public Tag(String name, String content, String description, String localization) {
+    public TestNfcTag(String name, String content, String description, double latitude, double longitude) {
         this.id = id;
         this.name = name;
         this.content = content;
         this.description = description;
-        this.localization = localization;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    //  public Tag(Long id, St)
+    //  public TestNfcTag(Long id, St)
 
         public Long getId() {
             return id;
@@ -63,13 +65,19 @@ public class Tag {
             this.description = description;
         }
 
-        public String getLocalization() {
-            return localization;
+        public double getLatitude() {
+            return latitude;
         }
 
-        public void setLocalization(String localization) {
-            this.localization = localization;
+        public void setLatitude(double latitude) {
+            this.latitude = latitude;
         }
 
+        public double getLongitude() {
+            return longitude;
+        }
 
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
+}

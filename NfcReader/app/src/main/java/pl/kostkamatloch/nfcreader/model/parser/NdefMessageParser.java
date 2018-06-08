@@ -43,7 +43,7 @@ public class NdefMessageParser {
     }
 
     public static List<ParsedNdefRecord> getRecords(NdefRecord[] records) {
-        List<ParsedNdefRecord> elements = new ArrayList<ParsedNdefRecord>();
+        List<ParsedNdefRecord> elements = new ArrayList<>();
 
         for (final NdefRecord record : records) {
             if (UriRecord.isUri(record)) {
@@ -59,6 +59,7 @@ public class NdefMessageParser {
                     }
                 });
             }
+
         }
 
         return elements;

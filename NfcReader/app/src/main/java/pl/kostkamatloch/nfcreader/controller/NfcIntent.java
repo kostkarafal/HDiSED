@@ -1,4 +1,4 @@
-package pl.kostkamatloch.nfcreader.model.parser;
+package pl.kostkamatloch.nfcreader.controller;
 
 import android.content.Intent;
 import android.nfc.NdefMessage;
@@ -8,10 +8,14 @@ import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
 import android.os.Parcelable;
+import android.util.Base64;
+
 
 import java.util.List;
 
+import pl.kostkamatloch.nfcreader.model.parser.NdefMessageParser;
 import pl.kostkamatloch.nfcreader.model.record.ParsedNdefRecord;
+import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
 
 /**
  * Created by Rafal on 06.06.2018.
@@ -20,17 +24,19 @@ import pl.kostkamatloch.nfcreader.model.record.ParsedNdefRecord;
 public class NfcIntent {
 
 
+
+    public static NfcTag nfcTag;
+
     public static String resolveIntent(Intent intent)
     {
         String action = intent.getAction();
-
+        nfcTag = new NfcTag();
         if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
                 || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
                 || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action))
         {
             Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage[] msgs = null;
-
             if(rawMsgs != null)
             {
                 msgs = new NdefMessage[rawMsgs.length];
@@ -42,9 +48,20 @@ public class NfcIntent {
             {
                 byte[] empty = new byte[0];
                 byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
-                Tag tag = (Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+                Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+
+
+
                 byte[] payload = dumpTagData(tag).getBytes();
+
+
+
                 NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
+                nfcTag.setPayload(Base64.encodeToString(payload,Base64.DEFAULT));
+
+                nfcTag.setIdTag(Base64.encodeToString(id,Base64.DEFAULT));
+                nfcTag.setTnf(record.getTnf());
+
                 NdefMessage msg = new NdefMessage(new NdefRecord[]{record});
                 msgs = new NdefMessage[]{msg};
             }
@@ -67,6 +84,7 @@ public class NfcIntent {
 
         for(int i = 0; i<size; i++)
         {
+            NdefRecord rec;
             ParsedNdefRecord record = records.get(i);
             String str = record.str();
             builder.append(str).append("\n");
@@ -78,20 +96,26 @@ public class NfcIntent {
 
     private static String dumpTagData(Tag tag) {
         StringBuilder sb = new StringBuilder();
+        StringBuilder technologies = new StringBuilder();
         byte[] id = tag.getId();
+
+
         sb.append("ID (hex): ").append(toHex(id)).append('\n');
         sb.append("ID (reversed hex): ").append(toReversedHex(id)).append('\n');
         sb.append("ID (dec): ").append(toDec(id)).append('\n');
         sb.append("ID (reversed dec): ").append(toReversedDec(id)).append('\n');
 
         String prefix = "android.nfc.tech.";
-        sb.append("Technologies: ");
-        for (String tech : tag.getTechList()) {
-            sb.append(tech.substring(prefix.length()));
-            sb.append(", ");
-        }
 
-        sb.delete(sb.length() - 2, sb.length());
+        sb.append("Technologies: ");
+
+        for (String tech : tag.getTechList()) {
+            technologies.append(tech.substring(prefix.length()));
+            technologies.append(", ");
+        }
+        technologies.delete(technologies.length() - 2, technologies.length());
+        nfcTag.setTechnologies(technologies.toString());
+        sb.append(technologies);
 
         for (String tech : tag.getTechList()) {
             if (tech.equals(MifareClassic.class.getName())) {
@@ -147,8 +171,11 @@ public class NfcIntent {
                 sb.append(type);
             }
         }
+      //  String technologies = sb.substring(sb.indexOf("Technologies:"));
+        //nfcTag = new NfcTag(toHex(id),toReversedHex(id),toDec(id),toReversedDec(id),technologies);
 
         return sb.toString();
+
     }
 
     private static String toHex(byte[] bytes) {

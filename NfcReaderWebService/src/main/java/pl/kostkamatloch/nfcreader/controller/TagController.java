@@ -43,8 +43,8 @@ public class TagController {
         Tag tag = nfcTagRepository.findById(tagId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tag", "id", tagId));
 
-        tag.setName(tagDetails.getName());
-        tag.setContent(tagDetails.getContent());
+        //tag.setName(tagDetails.getName());
+      //  tag.setContent(tagDetails.getContent());
         
         Tag updatedTag = nfcTagRepository.save(tag);
         return updatedTag;

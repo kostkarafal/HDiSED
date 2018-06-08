@@ -8,25 +8,41 @@ import android.nfc.NfcAdapter;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import pl.kostkamatloch.nfcreader.model.parser.NfcIntent;
+import pl.kostkamatloch.nfcreader.controller.NfcIntent;
+import pl.kostkamatloch.nfcreader.controller.RestController;
 
 
-public class Main2Activity extends AppCompatActivity {
+public class NfcReaderActivity extends AppCompatActivity {
 
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
-    private TextView text;
-
+    private TextView textView;
+    private RestController restController;
+    private EditText editTextDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-        text = (TextView) findViewById(R.id.textNfc);
+        setContentView(R.layout.activity_nfc_reader);
+        textView = findViewById(R.id.textNfc);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        Button buttonAddTag = findViewById(R.id.buttonAddTag);
+        editTextDescription = findViewById(R.id.editTextDescr);
+        restController = new RestController(this);
+        buttonAddTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                restController.addTag(NfcIntent.nfcTag,editTextDescription.getText().toString());
+
+            }
+        });
+
 
         if(nfcAdapter == null)
         {
@@ -67,10 +83,10 @@ public class Main2Activity extends AppCompatActivity {
     protected  void onNewIntent(Intent intent)
     {
 
-       setIntent(intent);
+        setIntent(intent);
         String message = NfcIntent.resolveIntent(intent);
+        textView.setText(message);
 
-        text.setText(message);
 
     }
 

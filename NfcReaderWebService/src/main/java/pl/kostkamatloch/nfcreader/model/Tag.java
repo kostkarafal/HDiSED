@@ -11,7 +11,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "tag2")
+@Table(name = "test7tag")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
@@ -21,24 +21,33 @@ public class Tag {
     private Long id;
 
     @NotBlank
-    private String name;
+    private String idtag;
 
-    @NotBlank
-    private String content;
+
+    private short tnf;
+     
+    private String payload;
+   
+    private String text;
+    
+    private String uri;
+   
+    private String technologies;
+    
+    private double latitude;
+    
+   
+    private double longitude;
     
     @NotBlank
     private String description;
-    
-    @NotBlank
-    private String localization;
 
-//    @Column(nullable = false, updatable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @CreatedDate
-//    private Date createdAt;
-//
-//    @Column(nullable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+ //   @Column(nullable = false)
+ //   @Temporal(TemporalType.TIMESTAMP)
 //    @LastModifiedDate
 //    private Date updatedAt;
 
@@ -50,20 +59,50 @@ public class Tag {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getIdtag() {
+        return idtag;
     }
 
-    public void setName(String title) {
-        this.name = title;
+    public void setIdTag(String idtag) {
+        this.idtag = idtag;
     }
 
-    public String getContent() {
-        return content;
+    public short getTnf() {
+        return tnf;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTnf(short tnf) {
+        this.tnf = tnf;
+    }
+    
+     public String getPayload() {
+        return payload;
+    }
+
+    public void setPayload(String payload) {
+        this.payload = payload;
+    }
+    
+     public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+     public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+     public String getTechnologies() {
+        return technologies;
+    }
+
+    public void setTechnologies(String technologies) {
+        this.technologies = technologies;
     }
     
     public String getDescription() {
@@ -74,21 +113,29 @@ public class Tag {
         this.description = description;
     }
     
-    public String getLocalization() {
-        return localization;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setLocalization(String localization) {
-        this.localization = localization;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+    
+        public double getLongitude() {
+        return longitude;
     }
 
-//    public Date getCreatedAt() {
-//        return createdAt;
-//    }
-//
-//    public void setCreatedAt(Date createdAt) {
-//        this.createdAt = createdAt;
-//    }
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 //
 //    public Date getUpdatedAt() {
 //        return updatedAt;
