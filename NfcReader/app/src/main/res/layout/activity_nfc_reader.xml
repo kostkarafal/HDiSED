@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:gravity="center_horizontal"
-        android:text="Hold a testTag against the back of your device"
+        android:text="Przybliż tag NFC do tyłu telefonu"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -27,7 +27,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textNfc"
         android:layout_marginBottom="16dp"
-        android:text="Dodaj Tag" />
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Dodaj Tag"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse" />
 
     <EditText
         android:id="@+id/editTextDescr"
