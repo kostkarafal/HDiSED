@@ -32,11 +32,9 @@ import pl.kostkamatloch.nfcreader.model.webservice.TestNfcTag;
  */
 
 public class RestController {
-    public static  String RestUrl = "http://192.168.8.127:8080/rest/tag";
+    public static  String RestUrl = "https://nfcwebservice.appspot.com/rest/tag";
     private Context context;
-    private NfcTag tag;
-    //private final List<NfcTag> tags;
-    public static List<NfcTag> staticTags;
+
     public RestController(Context context)
     {
         this.context = context;

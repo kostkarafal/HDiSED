@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pl.kostkamatloch.nfcreader.controller.GPSTracker;
@@ -41,11 +42,10 @@ public class HistoryActivity extends AppCompatActivity {
                 for(NfcTag tag : tags)
                 {
                     String adress = GPSTracker.getAddress(tag.getLatitude(),tag.getLongitude());
-                    StringBuilder date = new StringBuilder();
-                    date.append(tag.getDate());
-                    date.replace(10,11," ");
-                    date.delete(16,date.length());
-                    tagList.add(date+"\nID: "+tag.getId().toString()+" TagID: "+tag.getIdTag()
+
+                    Date date = new Date(Long.parseLong(tag.getDate()));
+
+                    tagList.add(date.toString()+"\nID: "+tag.getId().toString()+" TagID: "+tag.getIdTag()
                             +"Technologies: "+tag.getTechnologies()+"\nDescription: "+tag.getDescription()
                             +"\nAdress: "+adress);
 
