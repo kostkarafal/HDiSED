@@ -3,7 +3,7 @@ spring:
     name: taskservice
   datasource: 
     driverClassName: com.mysql.jdbc.Driver
-    url: "jdbc:mysql://google/TASKSERVICE?cloudSqlInstance=springboot-gcp-cloudsql:asia-northeast1:springboot-gcp-cloudsql-instance&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=root&password=root"
+    url: "jdbc:mysql://google/nfc?cloudSqlInstance=nfcwebservice:europe-west3:mysql-nfc&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=root&password=root"
     password: "root"
     username: "root"
     testOnBorrow: true
