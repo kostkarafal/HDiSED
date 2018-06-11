@@ -16,26 +16,17 @@
  */
 package pl.kostkamatloch.nfcreader.model.record;
 
-        import android.app.Activity;
+
         import android.nfc.FormatException;
         import android.nfc.NdefMessage;
         import android.nfc.NdefRecord;
-        import android.support.v4.content.ContextCompat;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.ViewGroup.LayoutParams;
-        import android.widget.LinearLayout;
 
         import com.google.common.base.Charsets;
         import com.google.common.base.Preconditions;
         import com.google.common.collect.ImmutableMap;
         import com.google.common.collect.Iterables;
-       // import com.ssaurel.nfcreader.R;
-     //   import com.ssaurel.nfcreader.model.History;
-        import pl.kostkamatloch.nfcreader.model.parser.NdefMessageParser;
-     //   import com.ssaurel.nfcreader.utils.Utils;
 
+        import pl.kostkamatloch.nfcreader.model.parser.NdefMessageParser;
         import java.util.Arrays;
         import java.util.NoSuchElementException;
 

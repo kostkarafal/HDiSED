@@ -2,7 +2,7 @@ package pl.kostkamatloch.nfcreader.model.webservice;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Date;
+
 
 
 /**

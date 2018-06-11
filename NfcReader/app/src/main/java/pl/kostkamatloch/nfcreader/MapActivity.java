@@ -1,5 +1,6 @@
 package pl.kostkamatloch.nfcreader;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import java.util.List;
 import pl.kostkamatloch.nfcreader.controller.RestController;
 import pl.kostkamatloch.nfcreader.controller.VolleyGetCallback;
 import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
+
+import static pl.kostkamatloch.nfcreader.MainActivity.actualLocation;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -104,8 +107,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
+
         gmap.setMinZoomPreference(9);
-        LatLng ny = new LatLng(40.7143528, -74.0059731);
-        gmap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+        LatLng actualLatLng = new LatLng(actualLocation.getLatitude(), actualLocation.getLongitude());
+
+        gmap.moveCamera(CameraUpdateFactory.newLatLng(actualLatLng));
     }
 }

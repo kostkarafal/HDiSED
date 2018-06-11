@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import pl.kostkamatloch.nfcreader.controller.GPSTracker;
+import pl.kostkamatloch.nfcreader.controller.GpsLocation;
 import pl.kostkamatloch.nfcreader.controller.RestController;
 import pl.kostkamatloch.nfcreader.controller.VolleyGetCallback;
 import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
@@ -34,6 +34,7 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onResume()
     {
+
         super.onResume();
         rest.getAllTags(new VolleyGetCallback() {
             @Override
@@ -41,7 +42,7 @@ public class HistoryActivity extends AppCompatActivity {
                 ArrayList<String> tagList = new ArrayList<>();
                 for(NfcTag tag : tags)
                 {
-                    String adress = GPSTracker.getAddress(tag.getLatitude(),tag.getLongitude());
+                    String adress = GpsLocation.getAddress(tag.getLatitude(),tag.getLongitude());
 
                     Date date = new Date(Long.parseLong(tag.getDate()));
 
@@ -52,6 +53,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.list_item,tagList);
                 listView.setAdapter(adapter);
+
             }
             @Override
             public  void onFailure(VolleyError error){

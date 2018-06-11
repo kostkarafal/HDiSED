@@ -30,6 +30,8 @@ import pl.kostkamatloch.nfcreader.controller.RestController;
 import pl.kostkamatloch.nfcreader.controller.VolleyGetCallback;
 import pl.kostkamatloch.nfcreader.controller.VolleyPostCallback;
 
+import static pl.kostkamatloch.nfcreader.MainActivity.actualLocation;
+
 
 public class NfcReaderActivity extends AppCompatActivity {
 
@@ -38,8 +40,7 @@ public class NfcReaderActivity extends AppCompatActivity {
     private TextView textView;
     private RestController restController;
     private EditText editTextDescription;
-    private FusedLocationProviderClient mFusedLocationClient;
-    private Location actualLocation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,6 @@ public class NfcReaderActivity extends AppCompatActivity {
         Button buttonAddTag = findViewById(R.id.buttonAddTag);
         editTextDescription = findViewById(R.id.editTextDescr);
         restController = new RestController(this);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         buttonAddTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,25 +79,6 @@ public class NfcReaderActivity extends AppCompatActivity {
         });
 
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-
-                if (location != null) {
-                    actualLocation = location;
-                }
-            }
-        });
 
         if(nfcAdapter == null)
         {

@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
-import pl.kostkamatloch.nfcreader.model.webservice.TestNfcTag;
+
 
 /**
  * Created by Rafal on 06.06.2018.

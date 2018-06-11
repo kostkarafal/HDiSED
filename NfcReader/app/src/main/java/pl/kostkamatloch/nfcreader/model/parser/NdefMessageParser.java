@@ -16,18 +16,14 @@
  */
 package pl.kostkamatloch.nfcreader.model.parser;
 
-        import android.app.Activity;
+
         import android.nfc.NdefMessage;
         import android.nfc.NdefRecord;
 
-      //  import com.ssaurel.nfcreader.R;
-    //    import com.ssaurel.nfcreader.model.History;
         import pl.kostkamatloch.nfcreader.model.record.ParsedNdefRecord;
         import pl.kostkamatloch.nfcreader.model.record.SmartPoster;
         import pl.kostkamatloch.nfcreader.model.record.TextRecord;
         import pl.kostkamatloch.nfcreader.model.record.UriRecord;
-
-    //    import com.ssaurel.nfcreader.utils.NFCReaderApp;
 
         import java.util.ArrayList;
         import java.util.List;

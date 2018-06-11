@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import pl.kostkamatloch.nfcreader.controller.RestController;
 
@@ -39,7 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
         buttonDefaultURL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RestController.RestUrl = "http://192.168.8.127:8080/rest/tag";
+                RestController.RestUrl = "https://nfcwebservice.appspot.com/rest/tag";
                 textView.setText(RestController.RestUrl);
             }
         });

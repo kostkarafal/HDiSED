@@ -16,16 +16,11 @@
  */
 
 package pl.kostkamatloch.nfcreader.model.record;
-        import android.app.Activity;
+
         import android.nfc.NdefRecord;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.TextView;
 
         import com.google.common.base.Preconditions;
-       // import com.ssaurel.nfcreader.R;
-      //  import com.ssaurel.nfcreader.model.History;
+
 
         import java.io.UnsupportedEncodingException;
         import java.util.Arrays;
