@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: taskservice
+  datasource: 
+    driverClassName: com.mysql.jdbc.Driver
+    url: "jdbc:mysql://google/TASKSERVICE?cloudSqlInstance=springboot-gcp-cloudsql:asia-northeast1:springboot-gcp-cloudsql-instance&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=root&password=root"
+    password: "root"
+    username: "root"
+    testOnBorrow: true
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
