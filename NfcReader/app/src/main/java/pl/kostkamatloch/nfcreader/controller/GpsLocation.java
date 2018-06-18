@@ -27,10 +27,9 @@ public class GpsLocation {
 
 
             Log.v("IGA", "Address " + add);
-            // Toast.makeText(this, "Address=>" + add,
-            // Toast.LENGTH_SHORT).show();
+
             return add;
-            // TennisAppActivity.showDialog(add);
+
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

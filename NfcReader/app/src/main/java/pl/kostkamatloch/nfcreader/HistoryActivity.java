@@ -19,8 +19,8 @@ import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    ListView listView;
-    RestController rest;
+    public static ListView listView;
+    public RestController rest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,20 +38,8 @@ public class HistoryActivity extends AppCompatActivity {
         super.onResume();
         rest.getAllTags(new VolleyGetCallback() {
             @Override
-            public void onSucces(List<NfcTag> tags) {
-                ArrayList<String> tagList = new ArrayList<>();
-                for(NfcTag tag : tags)
-                {
-                    String adress = GpsLocation.getAddress(tag.getLatitude(),tag.getLongitude());
-
-                    Date date = new Date(Long.parseLong(tag.getDate()));
-
-                    tagList.add(date.toString()+"\nID: "+tag.getId().toString()+" TagID: "+tag.getIdTag()
-                            +"Technologies: "+tag.getTechnologies()+"\nDescription: "+tag.getDescription()
-                            +"\nAdress: "+adress);
-
-                }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HistoryActivity.this, R.layout.list_item,tagList);
+            public void onSucces(ArrayList<NfcTag> tags) {
+                CustomAdapter adapter = new CustomAdapter(tags,HistoryActivity.this,rest,listView);
                 listView.setAdapter(adapter);
 
             }
@@ -59,6 +47,7 @@ public class HistoryActivity extends AppCompatActivity {
             public  void onFailure(VolleyError error){
                 Toast.makeText(HistoryActivity.this,"Brak połączenia z serverem",Toast.LENGTH_LONG).show();
             }
+
         });
 
     }

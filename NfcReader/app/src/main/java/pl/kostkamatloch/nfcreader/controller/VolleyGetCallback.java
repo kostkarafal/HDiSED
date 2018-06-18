@@ -2,6 +2,7 @@ package pl.kostkamatloch.nfcreader.controller;
 
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
@@ -11,7 +12,7 @@ import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
  */
 
 public interface VolleyGetCallback {
-    void onSucces(List<NfcTag> tags);
+    void onSucces(ArrayList<NfcTag> tags);
 
     void onFailure(VolleyError error);
 

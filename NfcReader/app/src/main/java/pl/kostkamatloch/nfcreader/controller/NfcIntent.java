@@ -7,7 +7,9 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
+import android.os.Build;
 import android.os.Parcelable;
+import android.support.annotation.RequiresApi;
 import android.util.Base64;
 
 
@@ -27,6 +29,7 @@ public class NfcIntent {
 
     public static NfcTag nfcTag;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String resolveIntent(Intent intent)
     {
         String action = intent.getAction();
@@ -57,8 +60,7 @@ public class NfcIntent {
 
 
                 NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
-                nfcTag.setPayload(Base64.encodeToString(payload,Base64.DEFAULT));
-
+                nfcTag.setPayload(Base64.encodeToString(payload, Base64.DEFAULT));
                 nfcTag.setIdTag(Base64.encodeToString(id,Base64.DEFAULT));
                 nfcTag.setTnf(record.getTnf());
 

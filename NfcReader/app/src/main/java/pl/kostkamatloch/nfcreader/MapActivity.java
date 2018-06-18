@@ -13,6 +13,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.kostkamatloch.nfcreader.controller.RestController;
@@ -43,7 +44,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapView.getMapAsync(this);
         restController.getAllTags(new VolleyGetCallback() {
             @Override
-            public void onSucces(List<NfcTag> tags) {
+            public void onSucces(ArrayList<NfcTag> tags) {
                 LatLng cameraPosition = new LatLng(tags.get(0).getLatitude(),tags.get(0).getLongitude());
                 for(NfcTag tag : tags)
                 {

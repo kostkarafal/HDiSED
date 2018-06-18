@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
@@ -56,7 +57,7 @@ public class RestController {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        List<NfcTag> tags = new Gson().fromJson(response.toString(), listType);
+                        ArrayList<NfcTag> tags = new Gson().fromJson(response.toString(), listType);
                         Log.e("Rest GET Response", response.toString());
                         callback.onSucces(tags);
                     }
@@ -92,6 +93,23 @@ public class RestController {
         requestQueue.add(objectRequest);
     }
 
+
+    public static void deleteTag(String id, Context context)
+    {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                RestUrl+"/"+id,
+                null,
+                response -> Log.e("Rest Response", response.toString()),
+                error -> Log.e("Rest Response", error.toString())
+
+        );
+
+        requestQueue.add(objectRequest);
+
+    }
 
     public void getTag(int id)
     {

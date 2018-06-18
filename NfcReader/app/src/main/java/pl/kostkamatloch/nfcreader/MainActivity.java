@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         final Button buttonSettings = findViewById(R.id.buttonSettings);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+
         buttonNfcReader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
