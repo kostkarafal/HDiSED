@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
 import android.util.Base64;
+import android.util.Log;
 
 
 import java.util.List;
@@ -40,29 +41,27 @@ public class NfcIntent {
         {
             Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage[] msgs = null;
+            byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
+            nfcTag.setIdTag(Base64.encodeToString(id, Base64.DEFAULT));
+            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+
             if(rawMsgs != null)
             {
                 msgs = new NdefMessage[rawMsgs.length];
 
                 for(int i=0; i<rawMsgs.length;i++)
                     msgs[i] = (NdefMessage) rawMsgs[i];
+
+                setTechnologies(tag);
+
+                return displayMsgs(msgs);
             }
-            else
-            {
+            else {
                 byte[] empty = new byte[0];
-                byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
-                Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-
-
 
                 byte[] payload = dumpTagData(tag).getBytes();
 
-
-
                 NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
-                nfcTag.setPayload(Base64.encodeToString(payload, Base64.DEFAULT));
-                nfcTag.setIdTag(Base64.encodeToString(id,Base64.DEFAULT));
-                nfcTag.setTnf(record.getTnf());
 
                 NdefMessage msg = new NdefMessage(new NdefRecord[]{record});
                 msgs = new NdefMessage[]{msg};
@@ -90,11 +89,25 @@ public class NfcIntent {
             ParsedNdefRecord record = records.get(i);
             String str = record.str();
             builder.append(str).append("\n");
+            Log.e("Test message",str);
         }
 
        return builder.toString();
     }
 
+private static void setTechnologies(Tag tag)
+{
+    String prefix = "android.nfc.tech.";
+    StringBuilder technologies = new StringBuilder();
+    for (String tech : tag.getTechList()) {
+        technologies.append(tech.substring(prefix.length()));
+        technologies.append(", ");
+    }
+    technologies.delete(technologies.length() - 2, technologies.length());
+    nfcTag.setTechnologies(technologies.toString());
+
+
+}
 
     private static String dumpTagData(Tag tag) {
         StringBuilder sb = new StringBuilder();

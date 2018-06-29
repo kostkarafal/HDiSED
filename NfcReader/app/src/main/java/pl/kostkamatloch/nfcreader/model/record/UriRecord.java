@@ -28,6 +28,8 @@ import com.google.common.primitives.Bytes;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
+import pl.kostkamatloch.nfcreader.controller.NfcIntent;
+
 /**
  * A parsed record containing a Uri.
  */
@@ -117,6 +119,7 @@ public class UriRecord implements ParsedNdefRecord {
     private static UriRecord parseAbsolute(NdefRecord record) {
         byte[] payload = record.getPayload();
         Uri uri = Uri.parse(new String(payload, Charset.forName("UTF-8")));
+        NfcIntent.nfcTag.setUri(uri.toString());
         return new UriRecord(uri);
     }
 
@@ -136,6 +139,7 @@ public class UriRecord implements ParsedNdefRecord {
                 Bytes.concat(prefix.getBytes(Charset.forName("UTF-8")), Arrays.copyOfRange(payload, 1,
                         payload.length));
         Uri uri = Uri.parse(new String(fullUri, Charset.forName("UTF-8")));
+        NfcIntent.nfcTag.setUri(uri.toString());
         return new UriRecord(uri);
     }
 

@@ -49,7 +49,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 for(NfcTag tag : tags)
                 {
                     LatLng marker = new LatLng(tag.getLatitude(),tag.getLongitude());
-                    gmap.addMarker(new MarkerOptions().position(marker).title(tag.getId().toString()));
+                    gmap.addMarker(new MarkerOptions().position(marker).title("ID: "+tag.getId().toString()+" Opis: "+tag.getDescription()));
                 }
                 gmap.moveCamera(CameraUpdateFactory.newLatLng(cameraPosition));
             }

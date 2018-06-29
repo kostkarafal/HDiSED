@@ -18,12 +18,15 @@
 package pl.kostkamatloch.nfcreader.model.record;
 
         import android.nfc.NdefRecord;
+        import android.util.Log;
 
         import com.google.common.base.Preconditions;
 
 
         import java.io.UnsupportedEncodingException;
         import java.util.Arrays;
+
+        import pl.kostkamatloch.nfcreader.controller.NfcIntent;
 
 /**
  * An NFC Text Record
@@ -80,6 +83,7 @@ public class TextRecord implements ParsedNdefRecord {
             String text =
                     new String(payload, languageCodeLength + 1,
                             payload.length - languageCodeLength - 1, textEncoding);
+            NfcIntent.nfcTag.setText(text);
             return new TextRecord(languageCode, text);
         } catch (UnsupportedEncodingException e) {
             // should never happen unless we get a malformed tag.

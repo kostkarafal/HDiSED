@@ -85,8 +85,8 @@
      android:layout_height="wrap_content"
      android:layout_marginBottom="10dp"
      android:text="Technologie:"
-     app:layout_constraintBottom_toBottomOf="parent"
-     tools:layout_editor_absoluteX="47dp" />
+     app:layout_constraintBottom_toTopOf="@+id/textView2"
+     tools:layout_editor_absoluteX="57dp" />
 
  <TextView
      android:id="@+id/textViewItemTech"
@@ -95,7 +95,7 @@
      android:layout_marginBottom="10dp"
      android:layout_marginStart="8dp"
      android:text="TextView"
-     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintBottom_toTopOf="@+id/textViewMessage"
      app:layout_constraintStart_toEndOf="@+id/textView11" />
 
  <Button
@@ -111,4 +111,23 @@
      android:textSize="18sp"
      app:layout_constraintEnd_toEndOf="parent"
      tools:layout_editor_absoluteY="0dp" />
+
+ <TextView
+     android:id="@+id/textView2"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginBottom="10dp"
+     android:text="Wiadomość:"
+     app:layout_constraintBottom_toBottomOf="parent"
+     tools:layout_editor_absoluteX="65dp" />
+
+ <TextView
+     android:id="@+id/textViewMessage"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginBottom="10dp"
+     android:layout_marginStart="8dp"
+     android:text="Brak"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintStart_toEndOf="@+id/textView2" />
 </android.support.constraint.ConstraintLayout>

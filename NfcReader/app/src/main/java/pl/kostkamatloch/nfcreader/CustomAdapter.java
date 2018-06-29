@@ -47,6 +47,7 @@ public class CustomAdapter extends ArrayAdapter<NfcTag> implements View.OnClickL
         TextView txtDescription;
         TextView txtAdress;
         TextView txtTech;
+        TextView txtMessage;
         Button buttonDelete;
     }
 
@@ -97,6 +98,7 @@ public class CustomAdapter extends ArrayAdapter<NfcTag> implements View.OnClickL
             viewHolder.txtAdress = (TextView) convertView.findViewById(R.id.textViewItemAdress);
             viewHolder.txtTech = convertView.findViewById(R.id.textViewItemTech);
             viewHolder.buttonDelete = convertView.findViewById(R.id.buttonDeleteItem);
+            viewHolder.txtMessage = convertView.findViewById(R.id.textViewMessage);
             result=convertView;
 
             convertView.setTag(viewHolder);
@@ -113,12 +115,24 @@ public class CustomAdapter extends ArrayAdapter<NfcTag> implements View.OnClickL
 
 
         viewHolder.txtDate.setText(df.format(date));
-        byte[] id = Base64.decode(nfcTag.getIdTag(),Base64.DEFAULT);
 
-        viewHolder.txtID.setText(ConvertBytes.toHex(id));
+        if(nfcTag.getIdTag() != null) {
+            byte[] id = Base64.decode(nfcTag.getIdTag(), Base64.DEFAULT);
+            viewHolder.txtID.setText(ConvertBytes.toHex(id));
+        }
+        else
+            viewHolder.txtID.setText("brak");
+
         viewHolder.txtDescription.setText(nfcTag.getDescription());
         viewHolder.txtAdress.setText(GpsLocation.getAddress(nfcTag.getLatitude(),nfcTag.getLongitude()));
-        viewHolder.txtTech.setText(nfcTag.getTechnologies());
+        if(nfcTag.getTechnologies() != null)
+             viewHolder.txtTech.setText(nfcTag.getTechnologies());
+        else
+            viewHolder.txtTech.setText("brak");
+        if(nfcTag.getText() != null)
+            viewHolder.txtMessage.setText(nfcTag.getText());
+        else
+            viewHolder.txtMessage.setText("Brak");
 
         viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
