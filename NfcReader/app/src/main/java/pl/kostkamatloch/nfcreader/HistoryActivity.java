@@ -2,20 +2,18 @@ package pl.kostkamatloch.nfcreader;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import pl.kostkamatloch.nfcreader.controller.GpsLocation;
+import pl.kostkamatloch.nfcreader.controller.CustomAdapter;
 import pl.kostkamatloch.nfcreader.controller.RestController;
 import pl.kostkamatloch.nfcreader.controller.VolleyGetCallback;
 import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
+
 
 public class HistoryActivity extends AppCompatActivity {
 

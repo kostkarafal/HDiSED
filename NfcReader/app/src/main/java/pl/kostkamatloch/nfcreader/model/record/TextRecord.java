@@ -31,6 +31,7 @@ package pl.kostkamatloch.nfcreader.model.record;
 /**
  * An NFC Text Record
  */
+//processing specific type of nfc message
 public class TextRecord implements ParsedNdefRecord {
 
     /** ISO/IANA language code */

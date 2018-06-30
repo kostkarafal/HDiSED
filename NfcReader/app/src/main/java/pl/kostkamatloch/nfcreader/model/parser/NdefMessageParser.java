@@ -1,20 +1,15 @@
 package pl.kostkamatloch.nfcreader.model.parser;
 
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import pl.kostkamatloch.nfcreader.controller.NfcIntent;
+import pl.kostkamatloch.nfcreader.model.record.ParsedNdefRecord;
+import pl.kostkamatloch.nfcreader.model.record.SmartPoster;
+import pl.kostkamatloch.nfcreader.model.record.TextRecord;
+import pl.kostkamatloch.nfcreader.model.record.UriRecord;
 
-        import android.nfc.NdefMessage;
-        import android.nfc.NdefRecord;
-        import android.nfc.NfcAdapter;
-        import android.nfc.Tag;
-        import android.util.Base64;
-
-        import pl.kostkamatloch.nfcreader.controller.NfcIntent;
-        import pl.kostkamatloch.nfcreader.model.record.ParsedNdefRecord;
-        import pl.kostkamatloch.nfcreader.model.record.SmartPoster;
-        import pl.kostkamatloch.nfcreader.model.record.TextRecord;
-        import pl.kostkamatloch.nfcreader.model.record.UriRecord;
-
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NdefMessageParser {
@@ -25,7 +20,7 @@ public class NdefMessageParser {
     public static List<ParsedNdefRecord> parse(NdefMessage message) {
         return getRecords(message.getRecords());
     }
-
+    //check what type of NFC message is in tag
     public static List<ParsedNdefRecord> getRecords(NdefRecord[] records) {
         List<ParsedNdefRecord> elements = new ArrayList<>();
 

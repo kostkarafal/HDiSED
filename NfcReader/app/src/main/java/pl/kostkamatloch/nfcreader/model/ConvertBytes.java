@@ -4,6 +4,7 @@ package pl.kostkamatloch.nfcreader.model;
  * Created by Rafal on 18.06.2018.
  */
 
+//getting hex and dec representation of tag id
 public class ConvertBytes {
     public static String toHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();

@@ -16,14 +16,16 @@ import android.util.Log;
 
 import java.util.List;
 
+import pl.kostkamatloch.nfcreader.model.ConvertBytes;
 import pl.kostkamatloch.nfcreader.model.parser.NdefMessageParser;
 import pl.kostkamatloch.nfcreader.model.record.ParsedNdefRecord;
 import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
 
+
 /**
  * Created by Rafal on 06.06.2018.
  */
-
+//handle reading data from nfc tag
 public class NfcIntent {
 
 
@@ -115,10 +117,10 @@ private static void setTechnologies(Tag tag)
         byte[] id = tag.getId();
 
 
-        sb.append("ID (hex): ").append(toHex(id)).append('\n');
-        sb.append("ID (reversed hex): ").append(toReversedHex(id)).append('\n');
-        sb.append("ID (dec): ").append(toDec(id)).append('\n');
-        sb.append("ID (reversed dec): ").append(toReversedDec(id)).append('\n');
+        sb.append("ID (hex): ").append(ConvertBytes.toHex(id)).append('\n');
+        sb.append("ID (reversed hex): ").append(ConvertBytes.toReversedHex(id)).append('\n');
+        sb.append("ID (dec): ").append(ConvertBytes.toDec(id)).append('\n');
+        sb.append("ID (reversed dec): ").append(ConvertBytes.toReversedDec(id)).append('\n');
 
         String prefix = "android.nfc.tech.";
 
@@ -186,60 +188,9 @@ private static void setTechnologies(Tag tag)
                 sb.append(type);
             }
         }
-      //  String technologies = sb.substring(sb.indexOf("Technologies:"));
-        //nfcTag = new NfcTag(toHex(id),toReversedHex(id),toDec(id),toReversedDec(id),technologies);
-
         return sb.toString();
 
     }
 
-    private static String toHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = bytes.length - 1; i >= 0; --i) {
-            int b = bytes[i] & 0xff;
-            if (b < 0x10)
-                sb.append('0');
-            sb.append(Integer.toHexString(b));
-            if (i > 0) {
-                sb.append(" ");
-            }
-        }
-        return sb.toString();
-    }
 
-    private static String toReversedHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < bytes.length; ++i) {
-            if (i > 0) {
-                sb.append(" ");
-            }
-            int b = bytes[i] & 0xff;
-            if (b < 0x10)
-                sb.append('0');
-            sb.append(Integer.toHexString(b));
-        }
-        return sb.toString();
-    }
-
-    private static long toDec(byte[] bytes) {
-        long result = 0;
-        long factor = 1;
-        for (int i = 0; i < bytes.length; ++i) {
-            long value = bytes[i] & 0xffl;
-            result += value * factor;
-            factor *= 256l;
-        }
-        return result;
-    }
-
-    private static long toReversedDec(byte[] bytes) {
-        long result = 0;
-        long factor = 1;
-        for (int i = bytes.length - 1; i >= 0; --i) {
-            long value = bytes[i] & 0xffl;
-            result += value * factor;
-            factor *= 256l;
-        }
-        return result;
-    }
 }

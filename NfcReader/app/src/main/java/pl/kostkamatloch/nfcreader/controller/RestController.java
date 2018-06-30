@@ -31,7 +31,7 @@ import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
 /**
  * Created by Rafal on 06.06.2018.
  */
-
+//Handling communication with server via REST API
 public class RestController {
     public static  String RestUrl = "https://nfcwebservice.appspot.com/rest/tag";
     private Context context;

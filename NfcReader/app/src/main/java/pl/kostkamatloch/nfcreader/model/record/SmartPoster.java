@@ -2,25 +2,26 @@
 package pl.kostkamatloch.nfcreader.model.record;
 
 
-        import android.nfc.FormatException;
-        import android.nfc.NdefMessage;
-        import android.nfc.NdefRecord;
+import android.nfc.FormatException;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 
-        import com.google.common.base.Charsets;
-        import com.google.common.base.Preconditions;
-        import com.google.common.collect.ImmutableMap;
-        import com.google.common.collect.Iterables;
+import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 
-        import pl.kostkamatloch.nfcreader.controller.NfcIntent;
-        import pl.kostkamatloch.nfcreader.model.parser.NdefMessageParser;
-        import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
+import pl.kostkamatloch.nfcreader.controller.NfcIntent;
+import pl.kostkamatloch.nfcreader.model.parser.NdefMessageParser;
 
-        import java.util.Arrays;
-        import java.util.NoSuchElementException;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 /**
  * A representation of an NFC Forum "Smart Poster".
  */
+
+//processing specific type of nfc message
 public class SmartPoster implements ParsedNdefRecord {
 
     /**

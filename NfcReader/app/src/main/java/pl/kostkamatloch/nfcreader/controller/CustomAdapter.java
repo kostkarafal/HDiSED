@@ -1,4 +1,4 @@
-package pl.kostkamatloch.nfcreader;
+package pl.kostkamatloch.nfcreader.controller;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;
@@ -10,7 +10,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +22,7 @@ import java.util.ArrayList;
 
 import java.util.Date;
 
-import pl.kostkamatloch.nfcreader.controller.GpsLocation;
-import pl.kostkamatloch.nfcreader.controller.RestController;
-import pl.kostkamatloch.nfcreader.controller.VolleyGetCallback;
+import pl.kostkamatloch.nfcreader.R;
 import pl.kostkamatloch.nfcreader.model.ConvertBytes;
 import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
 
@@ -33,6 +30,7 @@ import pl.kostkamatloch.nfcreader.model.webservice.NfcTag;
  * Created by Rafal on 12.06.2018.
  */
 
+// Class creating elements of ListView in history View
 public class CustomAdapter extends ArrayAdapter<NfcTag> implements View.OnClickListener{
 
     private ArrayList<NfcTag> dataSet;
@@ -40,7 +38,7 @@ public class CustomAdapter extends ArrayAdapter<NfcTag> implements View.OnClickL
     RestController rest;
     ListView listView;
 
-    // View lookup cache
+
     private static class ViewHolder {
         TextView txtDate;
         TextView txtID;
@@ -88,7 +86,7 @@ public class CustomAdapter extends ArrayAdapter<NfcTag> implements View.OnClickL
         final View result;
 
         if (convertView == null) {
-
+            //assign ViewHolders to layout elements
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_item, parent, false);
@@ -99,21 +97,18 @@ public class CustomAdapter extends ArrayAdapter<NfcTag> implements View.OnClickL
             viewHolder.txtTech = convertView.findViewById(R.id.textViewItemTech);
             viewHolder.buttonDelete = convertView.findViewById(R.id.buttonDeleteItem);
             viewHolder.txtMessage = convertView.findViewById(R.id.textViewMessage);
-            result=convertView;
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
+
         }
 
-        //Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-    //    result.startAnimation(animation);
         lastPosition = position;
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
         Date date = new Date(Long.parseLong(nfcTag.getDate()));
 
-
+//Assign text to ViewHolders from nfcTag
         viewHolder.txtDate.setText(df.format(date));
 
         if(nfcTag.getIdTag() != null) {
@@ -134,6 +129,7 @@ public class CustomAdapter extends ArrayAdapter<NfcTag> implements View.OnClickL
         else
             viewHolder.txtMessage.setText("Brak");
 
+        //delete delete element from list and database
         viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

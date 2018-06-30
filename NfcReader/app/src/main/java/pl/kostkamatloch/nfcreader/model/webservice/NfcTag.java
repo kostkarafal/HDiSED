@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Rafal on 07.06.2018.
  */
 
+//NFC tag model to communicate with server
 public class NfcTag {
 
     @SerializedName("id")

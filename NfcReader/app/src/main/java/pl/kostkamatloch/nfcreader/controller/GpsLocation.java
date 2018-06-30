@@ -16,7 +16,7 @@ import pl.kostkamatloch.nfcreader.MainActivity;
 
 public class GpsLocation {
 
-
+//get adress from geographic coordinates
     public static String getAddress(double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(MainActivity.context, Locale.getDefault());
 
